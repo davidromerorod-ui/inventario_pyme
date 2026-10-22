@@ -18,20 +18,43 @@ st.markdown("---")
 # =========================================================
 # CONFIGURACIÓN DE POSTGRESQL LOCAL
 # =========================================================
-DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "dbname": "pyme_inventario_db",
-    "user": "postgres",
-    "password": "admin123"
-}
 
+# =========================================================
+# CONFIGURACIÓN DE POSTGRESQL: NEON Y LOCAL
+# =========================================================
+import os
 
 def get_connection():
-    conn = psycopg2.connect(**DB_CONFIG)
+    # En Streamlit Cloud, la conexión se obtiene desde Secrets.
+    try:
+        database_url = st.secrets.get("DATABASE_URL")
+    except Exception:
+        database_url = None
+
+    # Alternativa para variables de entorno.
+    if not database_url:
+        database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        conn = psycopg2.connect(
+            database_url,
+            sslmode="require",
+            connect_timeout=10
+        )
+    else:
+        # Conexión local para ejecutar el proyecto en tu PC.
+        conn = psycopg2.connect(
+            host="localhost",
+            port=5432,
+            dbname="pyme_inventario_db",
+            user="postgres",
+            password="admin123",
+            client_encoding="UTF8",
+            connect_timeout=5
+        )
+
     conn.set_client_encoding("UTF8")
     return conn
-
 
 # =========================================================
 # SECCIÓN 1: REGISTRAR PRODUCTOS
