@@ -8,7 +8,6 @@ import streamlit as st
 # =========================================================
 st.set_page_config(
     page_title="PYME - Sistema Seguro de Inventario",
-    page_icon="🛡️",
     layout="wide",
 )
 
@@ -115,7 +114,7 @@ if st.sidebar.button("Cerrar Sesión"):
     st.session_state.nombre_empleado = None
     st.rerun()
 
-st.title("📦 Panel General de Operaciones")
+st.title("Panel General de Operaciones")
 st.markdown("---")
 
 
@@ -125,17 +124,17 @@ st.markdown("---")
 if st.session_state.rol_logged == "Admin":
     tab_prod, tab_emp, tab_cat = st.tabs(
         [
-            "📦 Productos (Full CRUD)",
-            "👥 Gestión de Empleados",
-            "🏷️ Categorías",
+            "Productos (Full CRUD)",
+            "Gestión de Empleados",
+            "Categorías",
         ]
     )
 else:
     tab_prod, tab_emp, tab_cat = st.tabs(
         [
-            "📦 Inventario (Consulta)",
-            "👥 Directorio de Empleados",
-            "🏷️ Categorías",
+            "Inventario (Consulta)",
+            "Directorio de Empleados",
+            "Categorías",
         ]
     )
 
@@ -176,10 +175,10 @@ with tab_prod:
     # OPERACIONES ESCRITURA: Solo para Administradores
     if st.session_state.rol_logged == "Admin":
         st.markdown("---")
-        st.subheader("🛠️ Acciones Administrativas sobre Productos")
+        st.subheader("Acciones Administrativas sobre Productos")
 
         tab_crear, tab_editar, tab_borrar = st.tabs(
-            ["➕ Crear", "✏️ Modificar", "🗑️ Eliminar"]
+            ["Crear", "Modificar", "Eliminar"]
         )
 
         with tab_crear:
