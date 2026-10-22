@@ -23,7 +23,6 @@ st.markdown("---")
 # CONFIGURACIÓN DE POSTGRESQL: NEON Y LOCAL
 # =========================================================
 import os
-
 def get_connection():
     # En Streamlit Cloud, la conexión se obtiene desde Secrets.
     try:
